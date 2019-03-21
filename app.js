@@ -2,17 +2,20 @@
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
-
+var imported = document.createElement("data.js");
+imported.src = "Deskop/most_wanted/data.js";
+document.head.appendChild(imported);
+console.log(data);
 // app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-      var foundPerson = searchByName(people);
+      let foundPerson = searchByName(people);
       mainMenu(foundPerson, people);
       break;
     case 'no':
-      // TODO: search by traits
+      foundPerson = promptFor("Enter")
       break;
       default:
     app(people); // restart app
@@ -34,7 +37,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+    
     break;
     case "family":
     // TODO: get person's family

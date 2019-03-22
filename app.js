@@ -2,7 +2,6 @@
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
-
 // app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -12,6 +11,7 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
+      traitsMenu();
       // TODO: search by traits
       break;
       default:
@@ -22,19 +22,23 @@ function app(people){
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
-
+  var noPrompt = promptFor("Would you like to search by info? Enter 'yes' or 'no'.");
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
-
-  if(!person){
+    if (searchType == "no"){
+      traitsMenu();
+   }
+    else if (!person){
     alert("Could not find that individual.");
     return app(people); // restart
-  }
+    }
+    else
 
+  
   var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
     case "info":
-       giveInfo();
+      giveInfo(person);
     break;
     case "family":
     // TODO: get person's family
@@ -102,17 +106,35 @@ function chars(input){
   return true; // default validation only
 }
 
+function traitsMenu(){
+  var traitPrompt = promptFor("Enter which criteria you would like to search by: ID, gender, height, weight, or eyecolor.").toLowerCase();
+  switch(traitPrompt){
+    case "id":
+      let idPrompt = promptFor("Enter an id. Make sure to check your numbers carefully.");
+      traitsFilter(idPrompt, people.id);
+      break;
+    case "gender":
+      let genderPrompt = promptFor("Enter a gender, 'male' or 'female'.");
+      break;
+    case("height"):
+      let heightPrompt = promptFor("Enter a height in inches.");
+      break;
+    case("weight"):
+      let weightPrompt = promptFor("Enter a weight in pounds.");
+      break;
+    case("eyecolor"):
+      let eyeColorPrompt = promptFor("Enter an eyecolor.")
+      break;
+  }
+}
 function traitsFilter(input, trait){
   let foundInput = people.filter(function(input){
-    if(input == trait){
-      return true;
-    }
-    else{
-      return false;
-    }
-  });
-  return foundInput;
-}
-function giveInfo(){
-  alert(person.gender[0], person.height[0], person.weight[0], person.eyeColor[0], person.occupation[0])
+   if(input == trait){
+     return true;
+   }
+   else{
+     return false;
+   }
+ });
+ return foundInput;
 }

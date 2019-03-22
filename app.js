@@ -34,7 +34,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+       giveInfo();
     break;
     case "family":
     // TODO: get person's family
@@ -100,4 +100,19 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+function traitsFilter(input, trait){
+  let foundInput = people.filter(function(input){
+    if(input == trait){
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
+  return foundInput;
+}
+function giveInfo(){
+  alert(person.gender[0], person.height[0], person.weight[0], person.eyeColor[0], person.occupation[0])
 }

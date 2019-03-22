@@ -24,10 +24,7 @@ function app(people){
 function mainMenu(person, people){
   var noPrompt = promptFor("Would you like to search by info? Enter 'yes' or 'no'.");
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
-    if (searchType == "no"){
-      traitsMenu();
-   }
-    else if (!person){
+    if (!person){
     alert("Could not find that individual.");
     return app(people); // restart
     }
@@ -102,7 +99,7 @@ function yesNo(input){
 }
 
 function traitInput(input){
-  retrun input.toLowerCase() == "id" || input.toLowerCase() == "gender" input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "eyecolor";
+  return input.toLowerCase() == "id" || input.toLowerCase() == "gender" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "eyecolor";
 }
 
 // helper function to pass in as default promptFor validation
@@ -111,26 +108,28 @@ function chars(input){
 }
 
 function traitsMenu(){
-  var traitPrompt = prompt("Enter which criteria you would like to search by: ID, gender, height, weight, or eyecolor.", traits).toLowerCase();
+  var traitPrompt = promptFor("Enter which criteria you would like to search by: ID, gender, height, weight, or eyecolor.", traitInput).toLowerCase();
   switch(traitPrompt){
     case "id":
-      let idPrompt = promptFor("Enter an id. Make sure to check your numbers carefully.");
+      let idPrompt = prompt("Enter an id. Make sure to check your numbers carefully.");
       traitsFilter(idPrompt, people.id);
+        alert(person.id[0]);
       break;
-    case "gender": gender promptfor)
-      let genderPrompt = promptFor("Enter a gender, 'male' or 'female'.");
-      traitsFilter(idPrompt, people.gender);
+    case "gender": 
+      let genderPrompt = prompt("Enter a gender, 'male' or 'female'.");
+      traitsFilter(genderPrompt, people.gender);
       break;
     case("height"):
-      let heightPrompt = promptFor("Enter a height in inches.");
-      traitsFilter(idPrompt, people.height);
+      let heightPrompt = prompt("Enter a height in inches.");
+      traitsFilter(heightPrompt, people.height);
       break;
     case("weight"):
-      let weightPrompt = promptFor("Enter a weight in pounds.");
-      traitsFilter(id)
+      let weightPrompt = prompt("Enter a weight in pounds.");
+      traitsFilter(weightPrompt, people.weight);
       break;
     case("eyecolor"):
-      let eyeColorPrompt = promptFor("Enter an eyecolor.");
+      let eyeColorPrompt = prompt("Enter an eyecolor.");
+      traitsFilter(eyeColorPrompt, people.eyecolor)
       break;
   }
 }

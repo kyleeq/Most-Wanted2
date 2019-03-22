@@ -113,17 +113,20 @@ function traitsMenu(){
       let idPrompt = promptFor("Enter an id. Make sure to check your numbers carefully.");
       traitsFilter(idPrompt, people.id);
       break;
-    case "gender":
+    case "gender": gender promptfor)
       let genderPrompt = promptFor("Enter a gender, 'male' or 'female'.");
+      traitsFilter(idPrompt, people.gender);
       break;
     case("height"):
       let heightPrompt = promptFor("Enter a height in inches.");
+      traitsFilter(idPrompt, people.height);
       break;
     case("weight"):
       let weightPrompt = promptFor("Enter a weight in pounds.");
+      traitsFilter(id)
       break;
     case("eyecolor"):
-      let eyeColorPrompt = promptFor("Enter an eyecolor.")
+      let eyeColorPrompt = promptFor("Enter an eyecolor.");
       break;
   }
 }

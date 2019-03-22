@@ -11,7 +11,7 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
-      // TODO: search by traits
+      traitsMenu();
       break;
       default:
     app(people); // restart app
@@ -111,7 +111,7 @@ function chars(input){
 }
 
 function traitsMenu(){
-
+  let traitPrompt = promptFor("Enter Trait: ID, Gender, Height, Weight, EyeColo")
   switch(traitPrompt){
     case "id":
       let idPrompt = prompt("Enter an id. Make sure to check your numbers carefully.");

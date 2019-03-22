@@ -101,8 +101,8 @@ function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 
-function traits(input){
-  return input.toLowerCase() == "id" || input.toLowerCase() == "gender" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "eyecolor";
+function traitInput(input){
+  retrun input.toLowerCase() == "id" || input.toLowerCase() == "gender" input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "eyecolor";
 }
 
 // helper function to pass in as default promptFor validation

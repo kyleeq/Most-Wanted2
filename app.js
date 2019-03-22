@@ -116,7 +116,7 @@ function traitsMenu(){
     case "id":
       let idPrompt = prompt("Enter an id. Make sure to check your numbers carefully.");
       traitsFilter(idPrompt, people.id);
-        alert(person.id[0]);
+      alert(person.id[0]);
       break;
     case "gender": 
       let genderPrompt = prompt("Enter a gender, 'male' or 'female'.");

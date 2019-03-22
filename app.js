@@ -101,13 +101,17 @@ function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 
+function traitInput(input){
+  retrun input.toLowerCase() == "id" || input.toLowerCase() == "gender" input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "eyecolor";
+}
+
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
 }
 
 function traitsMenu(){
-  var traitPrompt = promptFor("Enter which criteria you would like to search by: ID, gender, height, weight, or eyecolor.").toLowerCase();
+  var traitPrompt = prompt("Enter which criteria you would like to search by: ID, gender, height, weight, or eyecolor.", traits).toLowerCase();
   switch(traitPrompt){
     case "id":
       let idPrompt = promptFor("Enter an id. Make sure to check your numbers carefully.");

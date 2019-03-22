@@ -11,7 +11,6 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
-      traitsMenu();
       // TODO: search by traits
       break;
       default:
@@ -22,7 +21,6 @@ function app(people){
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
-  var noPrompt = promptFor("Would you like to search by info? Enter 'yes' or 'no'.");
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
     if (!person){
     alert("Could not find that individual.");
@@ -31,11 +29,11 @@ function mainMenu(person, people){
     else
 
   
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'".trim());
 
   switch(displayOption){
     case "info":
-      giveInfo(person);
+      displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
@@ -81,12 +79,12 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo += "ID" + person.id + "\n";
-  personInfo += "gender: " + person.gender + "\n";
-  personInfo += "height: " + person.height + "\n";
-  personInfo += "weight: " + person.weight + "\n";
-  personInfo += "eyecolor: " + person.eyecolor + "\n";
-  personInfo += "occupation: " + person.occupation + "\n";
+  personInfo += "ID: " + person.id + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eyecolor: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
   alert(personInfo);
 }
 
@@ -113,7 +111,7 @@ function chars(input){
 }
 
 function traitsMenu(){
-  var traitPrompt = promptFor("Enter which criteria you would like to search by: ID, gender, height, weight, or eyecolor.", traitInput).toLowerCase();
+
   switch(traitPrompt){
     case "id":
       let idPrompt = prompt("Enter an id. Make sure to check your numbers carefully.");

@@ -111,32 +111,31 @@ function chars(input){
 }
 
 function traitsMenu(){
-  let traitPrompt = promptFor("Enter Trait: ID, Gender, Height, Weight, EyeColo")
+  let traitPrompt = promptFor("Enter a trait: ID, Gender, Height, Weight, EyeColor", traitInput);
   switch(traitPrompt){
     case "id":
-      let idPrompt = prompt("Enter an id. Make sure to check your numbers carefully.");
-      traitsFilter(idPrompt, people.id);
-      alert(person.id[0]);
+      let idPrompt = prompt("Enter an id. Make sure to check your numbers carefully.").trim();
+      alert(traitsFilter(idPrompt));
       break;
     case "gender": 
-      let genderPrompt = prompt("Enter a gender, 'male' or 'female'.");
+      let genderPrompt = prompt("Enter a gender, 'male' or 'female'.").trim();
       traitsFilter(genderPrompt, people.gender);
       break;
-    case("height"):
-      let heightPrompt = prompt("Enter a height in inches.");
+    case "height":
+      let heightPrompt = prompt("Enter a height in inches.").trim();
       traitsFilter(heightPrompt, people.height);
       break;
     case("weight"):
-      let weightPrompt = prompt("Enter a weight in pounds.");
+      let weightPrompt = prompt("Enter a weight in pounds.").trim();
       traitsFilter(weightPrompt, people.weight);
       break;
     case("eyecolor"):
-      let eyeColorPrompt = prompt("Enter an eyecolor.");
+      let eyeColorPrompt = prompt("Enter an eyecolor.").trim();
       traitsFilter(eyeColorPrompt, people.eyecolor)
       break;
   }
 }
-function traitsFilter(input, trait){
+function traitsFilter(input){
   let foundInput = people.filter(function(input){
    if(input == trait){
      return true;

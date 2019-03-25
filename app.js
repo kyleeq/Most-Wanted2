@@ -17,7 +17,7 @@ function app(people){
     app(people); // restart app
       break;
   }
-  mainMenu(thing, people);
+  mainMenu(foundPerson, people);
 }
 
 // Menu function to call once you find who you are looking for
@@ -37,7 +37,7 @@ function mainMenu(person, people){
       displayPerson(person);
     break;
     case "family":
-    // TODO: get person's family
+      familyFilter(person.lastName);
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -165,3 +165,14 @@ function traitsFilter(traitPrompt, question, people){
  });
  return foundInput;
 }
+function familyFilter(lastNameInput, people){
+  let foundRelatives = people.filter(function(el){
+    if(el[lastName] == lastNameInput){
+      return true;
+    }
+    else{
+      return false;
+    }
+    });
+    return foundRelatives;
+  }

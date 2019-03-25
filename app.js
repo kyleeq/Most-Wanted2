@@ -111,7 +111,7 @@ function chars(input){
 }
 
 function traitsMenu(){
-  let traitPrompt = promptFor("Enter a trait: ID, Gender, Height, Weight, EyeColor", traitInput);
+  let traitPrompt = promptFor("Enter a trait: 'Gender', 'Height', 'Weight', 'EyeColor',  'Restart' or 'Quit'", traitInput).toLowerCase();
   switch(traitPrompt){
     case "id":
       let idPrompt = prompt("Enter an id. Make sure to check your numbers carefully.").trim();
@@ -134,6 +134,13 @@ function traitsMenu(){
       let eyeColorPrompt = prompt("Enter an eyecolor.").trim();
       traitsFilter(eyeColorPrompt, people.eyecolor);
       break;
+    case "restart":
+      app(people);
+      break;
+    case "quit":
+      return;
+    default:
+      traitsMenu();
   }
 }
 function traitsFilter(traitPrompt, blah){

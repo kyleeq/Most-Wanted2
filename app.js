@@ -91,7 +91,7 @@ function displayPerson(person){
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
-    var response = prompt(question).trim();
+    var response = prompt(question);
   } while(!response || !valid(response));
   return response;
 }
@@ -115,7 +115,8 @@ function traitsMenu(){
   switch(traitPrompt){
     case "id":
       let idPrompt = prompt("Enter an id. Make sure to check your numbers carefully.").trim();
-      alert(traitsFilter(idPrompt people.id));
+       let traitResult = traitsFilter(idPrompt, people.id);
+       alert(traitResult);
       break;
     case "gender": 
       let genderPrompt = prompt("Enter a gender, 'male' or 'female'.").trim();
@@ -131,12 +132,12 @@ function traitsMenu(){
       break;
     case"eyecolor":
       let eyeColorPrompt = prompt("Enter an eyecolor.").trim();
-      traitsFilter(eyeColorPrompt, people.eyecolor)
+      traitsFilter(eyeColorPrompt, people.eyecolor);
       break;
   }
 }
-function traitsFilter(traitPrompt){
-  let foundInput = people.filter(function(traitPrompt){
+function traitsFilter(traitPrompt, blah){
+  let foundInput = blah.filter(function(traitPrompt){
    if(traitPrompt === trait){
      return true;
    }
@@ -144,5 +145,5 @@ function traitsFilter(traitPrompt){
      return false;
    }
  });
- return foundInput;
+ return foundInput[0];
 }

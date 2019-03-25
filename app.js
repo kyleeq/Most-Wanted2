@@ -125,19 +125,19 @@ function traitsMenu(){
       let heightPrompt = prompt("Enter a height in inches.").trim();
       traitsFilter(heightPrompt, people.height);
       break;
-    case("weight"):
+    case "weight":
       let weightPrompt = prompt("Enter a weight in pounds.").trim();
       traitsFilter(weightPrompt, people.weight);
       break;
-    case("eyecolor"):
+    case"eyecolor":
       let eyeColorPrompt = prompt("Enter an eyecolor.").trim();
       traitsFilter(eyeColorPrompt, people.eyecolor)
       break;
   }
 }
-function traitsFilter(input){
-  let foundInput = people.filter(function(input){
-   if(input == trait){
+function traitsFilter(traitPrompt){
+  let foundInput = people.filter(function(traitPrompt){
+   if(traitPrompt === trait){
      return true;
    }
    else{

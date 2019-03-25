@@ -43,7 +43,7 @@ function mainMenu(person, people){
         
       }
       else if(specificFamily == "spouse"){
-        displayPerson(findSpouseName(people, person.currentSpouse[0]));
+        displayPerson(findSpouseName(people, person.currentSpouse));
       }
       else if(specificFamily == "siblings"){
         
@@ -203,7 +203,7 @@ function findParentName(people, parentID){
 function findSpouseName(people, spouseID){
   let id = 'id';
   let spouse = people.filter(function(el){
-    if(el[id]==spouseID){
+    if(el[id] == spouseID){
       return true;
     }
     else{

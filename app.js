@@ -5,18 +5,19 @@ Build all of your functions for displaying and gathering information below (GUI)
 // app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  var foundPerson;
   switch(searchType){
     case 'yes':
-      var foundPerson = searchByName(people);
-      mainMenu(foundPerson, people);
+      foundPerson = searchByName(people);
       break;
     case 'no':
-      traitsMenu(people);
+      foundPerson = traitsMenu(people);
       break;
       default:
     app(people); // restart app
       break;
   }
+  mainMenu(thing, people);
 }
 
 // Menu function to call once you find who you are looking for
@@ -144,13 +145,18 @@ function traitsMenu(people){
   }
   if(result.length > 1){
   displayPeople(result);
+  traitsMenu(result);
   }
-  traitMenu(people);
+  else{
+  displayPeople(result);
+  return result[0];
+ 
+  }
 }
 
 function traitsFilter(traitPrompt, question, people){
   let foundInput = people.filter(function(el){
-   if(el[question] === traitPrompt){
+   if(el[question] == traitPrompt){
      return true;
    }
    else{

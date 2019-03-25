@@ -30,20 +30,25 @@ function mainMenu(person, people){
     else
 
   
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'".trim());
+  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their personal 'info' or 'family' Type the option you want or 'restart' or 'quit'".trim());
   switch(displayOption){
     case "info":
       displayPerson(person);
     break;
     case "family":
-      let specificFamily = promptFor("Would you like info on Parents, Siblings, or children?", familyInput);
-      if(specificFamily == "Parents"){
-        alert(person.parents);
+      let specificFamily = promptFor("Would you like info on Parents, Siblings, or Children?", familyInput);
+      if(specificFamily == "parents"){
+        displayPerson(findParentName(people, person.parents[0]));
+        displayPerson(findParentName(people, person.parents[1]));
+        
       }
-      else if(specificFamily == "Siblings"){
-
+      else if(specificFamily == "spouse"){
+        displayPerson(findSpouseName(people, person.currentSpouse[0]));
       }
-      else if(specificFamily == "Children"){
+      else if(specificFamily == "siblings"){
+        
+      }
+      else if(specificFamily == "children"){
 
       }
       let foundRelatives = familyFilter(person.id, people);
@@ -181,8 +186,29 @@ function familyFilter(){
 }
 
 function familyInput(input){
-  return input.toLowerCase() == "parents" || input.toLowerCase() == "siblings" || input.toLowerCase() == "children";
+  return input.toLowerCase() == "parents" || input.toLowerCase() == "siblings" || input.toLowerCase() == "children" || input.toLowerCase() == "spouse"
 }
-function findParentName(people, ){
-
+function findParentName(people, parentID){
+  let id = 'id';
+  let parent = people.filter(function(el){
+    if(el[id] == parentID){
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
+  return parent[0]
+}
+function findSpouseName(people, spouseID){
+  let id = 'id';
+  let spouse = people.filter(function(el){
+    if(el[id]==spouseID){
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
+  return spouse[0];
 }

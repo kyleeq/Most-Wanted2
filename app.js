@@ -38,8 +38,8 @@ function mainMenu(person, people){
     case "family":
       let specificFamily = promptFor("Would you like info on Parents, Siblings, or Children?", familyInput).toLowerCase();
       if(specificFamily == "parents"){
-        displayPerson(findParentName(people, person.parents[0]));
-        displayPerson(findParentName(people, person.parents[1]));
+        displayParent(parentFilter(people, person.parents[0]));
+        displayParent(parentFilter(people, person.parents[1]));
         
       }
       else if(specificFamily == "spouse"){
@@ -105,6 +105,19 @@ function displayPerson(person){
   alert(personInfo);
 }
 
+function displayParent(people, person){
+  let grass = people.filter(function(el){
+    if(el['id'] == person){
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
+  return grass;
+  // let pain = "Parent: " + person.firstName + " " + person.lastName + "\n";
+  // alert(pain);
+}
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
@@ -188,7 +201,7 @@ function familyFilter(){
 function familyInput(input){
   return input.toLowerCase() == "parents" || input.toLowerCase() == "siblings" || input.toLowerCase() == "children" || input.toLowerCase() == "spouse"
 }
-function findParentName(people, parentID){
+function parentFilter(people, parentID){
   let id = 'id';
   let parent = people.filter(function(el){
     if(el[id] == parentID){
@@ -228,9 +241,5 @@ function descendantsFilter(people, possibleDescendantId){
   descendantsFilter(people, foundDescendants);
 }
 
-function displayFamily(people, ogPerson, relation){
-  alert(people.map(function(person){
-    return person.firstName + " " + person.lastName + "is " + ogPerson + "'s" + relation + ".";
-  }).join("\n"));
- }
+
 

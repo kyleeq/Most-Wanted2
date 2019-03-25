@@ -43,7 +43,7 @@ function mainMenu(person, people){
         
       }
       else if(specificFamily == "spouse"){
-        displayPerson(findSpouseName(people, person.currentSpouse[0]));
+        displayPerson(findSpouseName(people, person.currentSpouse));
       }
       else if(specificFamily == "siblings"){
         
@@ -203,7 +203,7 @@ function findParentName(people, parentID){
 function findSpouseName(people, spouseID){
   let id = 'id';
   let spouse = people.filter(function(el){
-    if(el[id]==spouseID){
+    if(el[id] == spouseID){
       return true;
     }
     else{
@@ -212,6 +212,7 @@ function findSpouseName(people, spouseID){
   });
   return spouse[0];
 }
+
 
 // add person.parents[0, 1] as parameter when calling in mainMenu();
 function descendantsFilter(people, possibleDescendantId){
@@ -226,3 +227,10 @@ function descendantsFilter(people, possibleDescendantId){
   });
   descendantsFilter(people, foundDescendants);
 }
+
+function displayFamily(people, ogPerson, relation){
+  alert(people.map(function(person){
+    return person.firstName + " " + person.lastName + "is " + ogPerson + "'s" + relation + ".";
+  }).join("\n"));
+ }
+

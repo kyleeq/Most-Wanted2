@@ -112,25 +112,32 @@ function chars(input){
 
 function traitsMenu(people){
   let traitPrompt = promptFor("Enter a trait: ID, Gender, Height, Weight, EyeColor", traitInput);
-  let promptThingy;
+  let promptResult;
   let result;
   switch(traitPrompt){
     case "gender": 
-      promptThingy = prompt("Enter a gender, 'male' or 'female'.").trim();
-      result = traitsFilter(promptThingy, traitPrompt, people);
+      promptResult = prompt("Enter a gender, 'male' or 'female'.").trim();
+      result = traitsFilter(promptResult, traitPrompt, people);
       break;
     case "height":
-      promptThingy = prompt("Enter a height in inches.").trim();
-      result = traitsFilter(promptThingy, traitPrompt, people);
+      promptResult = prompt("Enter a height in inches.").trim();
+      result = traitsFilter(promptResult, traitPrompt, people);
       break;
     case "weight":
       promptThingy = prompt("Enter a weight in pounds.").trim();
       result = traitsFilter(promptThingy, traitPrompt, people);
       break;
     case"eyeColor":
-      promptThingy = prompt("Enter an eyecolor.").trim();
-      result = traitsFilter(promptThingy, traitPrompt, people);
+      promptResult = prompt("Enter an eyecolor.").trim();
+      result = traitsFilter(promptResult, traitPrompt, people);
       break;
+    case "restart":
+      app(people);
+      break;
+    case "quit":
+      return;
+    default:
+      traitsMenu();
   }
   if(result.length > 1){
   displayPeople(result);

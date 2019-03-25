@@ -212,3 +212,8 @@ function findSpouseName(people, spouseID){
   });
   return spouse[0];
 }
+function displayFamily(people, ogPerson, relation){
+  alert(people.map(function(person){
+    return person.firstName + " " + person.lastName + "is " + ogPerson + "'s" + relation + ".";
+  }).join("\n"));
+ }

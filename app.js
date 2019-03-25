@@ -36,7 +36,7 @@ function mainMenu(person, people){
       displayPerson(person);
     break;
     case "family":
-      let specificFamily = promptFor("Would you like info on Parents, Siblings, or Children?", familyInput);
+      let specificFamily = promptFor("Would you like info on Parents, Siblings, or Children?", familyInput).toLowerCase();
       if(specificFamily == "parents"){
         displayPerson(findParentName(people, person.parents[0]));
         displayPerson(findParentName(people, person.parents[1]));
@@ -198,7 +198,7 @@ function findParentName(people, parentID){
       return false;
     }
   });
-  return parent[0]
+  return parent[0];
 }
 function findSpouseName(people, spouseID){
   let id = 'id';
@@ -211,4 +211,18 @@ function findSpouseName(people, spouseID){
     }
   });
   return spouse[0];
+}
+
+// add person.parents[0, 1] as parameter when calling in mainMenu();
+function descendantsFilter(people, possibleDescendantId){
+  let id = "id";
+  let foundDescendants = people.filter(function(el){
+    if(el["id"] == [possibleDescendantId]){
+      return true
+    }
+    else{
+      return false
+    }
+  });
+  descendantsFilter(people, foundDescendants);
 }

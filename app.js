@@ -11,7 +11,7 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
-      traitsMenu();
+      traitsMenu(people);
       break;
       default:
     app(people); // restart app
@@ -110,40 +110,42 @@ function chars(input){
   return true; // default validation only
 }
 
-function traitsMenu(){
+function traitsMenu(people){
   let traitPrompt = promptFor("Enter a trait: ID, Gender, Height, Weight, EyeColor", traitInput);
+  let promptThingy;
+  let result;
   switch(traitPrompt){
-    case "id":
-      let idPrompt = prompt("Enter an id. Make sure to check your numbers carefully.").trim();
-       let traitResult = traitsFilter(idPrompt, people.id);
-       alert(traitResult);
-      break;
     case "gender": 
-      let genderPrompt = prompt("Enter a gender, 'male' or 'female'.").trim();
-      traitsFilter(genderPrompt, people.gender);
+      promptThingy = prompt("Enter a gender, 'male' or 'female'.").trim();
+      result = traitsFilter(promptThingy, traitPrompt, people);
       break;
     case "height":
-      let heightPrompt = prompt("Enter a height in inches.").trim();
-      traitsFilter(heightPrompt, people.height);
+      promptThingy = prompt("Enter a height in inches.").trim();
+      result = traitsFilter(promptThingy, traitPrompt, people);
       break;
     case "weight":
-      let weightPrompt = prompt("Enter a weight in pounds.").trim();
-      traitsFilter(weightPrompt, people.weight);
+      promptThingy = prompt("Enter a weight in pounds.").trim();
+      result = traitsFilter(promptThingy, traitPrompt, people);
       break;
-    case"eyecolor":
-      let eyeColorPrompt = prompt("Enter an eyecolor.").trim();
-      traitsFilter(eyeColorPrompt, people.eyecolor);
+    case"eyeColor":
+      promptThingy = prompt("Enter an eyecolor.").trim();
+      result = traitsFilter(promptThingy, traitPrompt, people);
       break;
   }
+  if(result.length > 1){
+  displayPeople(result);
+  }
+  
+  traitMenu();
 }
-function traitsFilter(traitPrompt, blah){
-  let foundInput = blah.filter(function(traitPrompt){
-   if(traitPrompt === trait){
+
+function traitsFilter(traitPrompt, question, people){
+  let foundInput = people.filter(function(el){
+   if(el[question] === traitPrompt){
      return true;
    }
    else{
      return false;
    }
  });
- return foundInput[0];
-}
+ return foundInput;

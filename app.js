@@ -37,7 +37,9 @@ function mainMenu(person, people){
       displayPerson(person);
     break;
     case "family":
-      familyFilter(person.lastName);
+      let foundRelatives = familyFilter(person.id, people);
+      displayPeople(foundRelatives);
+      return foundRelatives[0];
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -165,14 +167,14 @@ function traitsFilter(traitPrompt, question, people){
  });
  return foundInput;
 }
-function familyFilter(lastNameInput, people){
+function familyFilter(id, people){
   let foundRelatives = people.filter(function(el){
-    if(el[lastName] == lastNameInput){
+    if(el[people] == lastNameInput){
       return true;
     }
     else{
       return false;
     }
     });
-    return foundRelatives;
-  }
+  return foundRelatives;
+}

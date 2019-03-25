@@ -168,10 +168,11 @@ function traitsFilter(traitPrompt, question, people){
  return foundInput;
 }
 function familyFilter(id, people){
-  let foundRelatives = people.filter(function(el){
-    if(el[people] == lastNameInput){
+  let foundRelatives = people.id.filter(function(el){
+    if(el[people.id] == people.currentSpouse people.parents == people.parents){
       return true;
     }
+    else if (el[people.id] == people.parents)
     else{
       return false;
     }

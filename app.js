@@ -111,7 +111,7 @@ function chars(input){
 }
 
 function traitsMenu(people){
-  let traitPrompt = promptFor("Enter a trait: ID, Gender, Height, Weight, EyeColor", traitInput);
+  let traitPrompt = promptFor("Enter a trait: Gender, Height, Weight, EyeColor or Occupation.", traitInput);
   let promptResult;
   let result;
   switch(traitPrompt){
@@ -124,13 +124,16 @@ function traitsMenu(people){
       result = traitsFilter(promptResult, traitPrompt, people);
       break;
     case "weight":
-      promptThingy = prompt("Enter a weight in pounds.").trim();
-      result = traitsFilter(promptThingy, traitPrompt, people);
+      promptResult = prompt("Enter a weight in pounds.").trim();
+      result = traitsFilter(promptResult, traitPrompt, people);
       break;
-    case"eyeColor":
+    case "eyeColor":
       promptResult = prompt("Enter an eyecolor.").trim();
       result = traitsFilter(promptResult, traitPrompt, people);
       break;
+    case "occupation":
+      promptResult = prompt("Enter an occupation.").trim();
+      result = traitsFilter(promptResult, traitPrompt, people);
     case "restart":
       app(people);
       break;
@@ -142,8 +145,7 @@ function traitsMenu(people){
   if(result.length > 1){
   displayPeople(result);
   }
-  
-  traitMenu();
+  traitMenu(people);
 }
 
 function traitsFilter(traitPrompt, question, people){
@@ -156,3 +158,4 @@ function traitsFilter(traitPrompt, question, people){
    }
  });
  return foundInput;
+}

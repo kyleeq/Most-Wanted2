@@ -31,12 +31,21 @@ function mainMenu(person, people){
 
   
   var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'".trim());
-
   switch(displayOption){
     case "info":
       displayPerson(person);
     break;
     case "family":
+      let specificFamily = promptFor("Would you like info on Parents, Siblings, or children?", familyInput);
+      if(specificFamily == "Parents"){
+        alert(person.parents);
+      }
+      else if(specificFamily == "Siblings"){
+
+      }
+      else if(specificFamily == "Children"){
+
+      }
       let foundRelatives = familyFilter(person.id, people);
       displayPeople(foundRelatives);
       return foundRelatives[0];
@@ -114,7 +123,7 @@ function chars(input){
 }
 
 function traitsMenu(people){
-  let traitPrompt = promptFor("Enter a trait: Gender, Height, Weight, EyeColor or Occupation.", traitInput);
+  let traitPrompt = promptFor("Choose a trait one at a time: Gender, Height, Weight, EyeColor or Occupation.", traitInput);
   let promptResult;
   let result;
   switch(traitPrompt){
@@ -157,7 +166,7 @@ function traitsMenu(people){
 }
 
 function traitsFilter(traitPrompt, question, people){
-  let foundInput = people.filter(function(el){
+  let foundTrait = people.filter(function(el){
    if(el[question] == traitPrompt){
      return true;
    }
@@ -165,17 +174,15 @@ function traitsFilter(traitPrompt, question, people){
      return false;
    }
  });
- return foundInput;
+ return foundTrait;
 }
-function familyFilter(id, people){
-  let foundRelatives = people.id.filter(function(el){
-    if(el[people.id] == people.currentSpouse people.parents == people.parents){
-      return true;
-    }
-    else if (el[people.id] == people.parents)
-    else{
-      return false;
-    }
-    });
-  return foundRelatives;
+function familyFilter(){
+
+}
+
+function familyInput(input){
+  return input.toLowerCase() == "parents" || input.toLowerCase() == "siblings" || input.toLowerCase() == "children";
+}
+function findParentName(people, ){
+
 }

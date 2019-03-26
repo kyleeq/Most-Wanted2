@@ -30,7 +30,7 @@ function mainMenu(person, people){
     else
 
   
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their personal 'info' or 'family' Type the option you want or 'restart' or 'quit'".trim());
+  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their personal 'info', 'family' or 'descendants?' Type the option you want or 'restart' or 'quit'".trim());
   switch(displayOption){
     case "info":
       displayPerson(person);
@@ -56,7 +56,7 @@ function mainMenu(person, people){
       return foundRelatives[0];
     break;
     case "descendants":
-    // TODO: get person's descendants
+      return descendantsFilter(person);
     break;
     case "restart":
     app(people); // restart
@@ -107,7 +107,7 @@ function displayPerson(person){
 
 function displayParent(people, person){
   let grass = people.filter(function(el){
-    if(el['id'] == person){
+    if(el["id"] == person){
       return true;
     }
     else{
@@ -135,13 +135,14 @@ function traitInput(input){
   return input.toLowerCase() == "id" || input.toLowerCase() == "gender" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "eyecolor";
 }
 
+
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
 }
 
 function traitsMenu(people){
-  let traitPrompt = promptFor("Choose a trait one at a time: Gender, Height, Weight, EyeColor or Occupation.", traitInput);
+  let traitPrompt = promptFor("Choose a trait one at a time: Gender, Height, Weight, EyeColor or Occupation. Otherwise, you can type in 'restart' or 'quit.'", traitInput);
   let promptResult;
   let result;
   switch(traitPrompt){
@@ -202,7 +203,7 @@ function familyInput(input){
   return input.toLowerCase() == "parents" || input.toLowerCase() == "siblings" || input.toLowerCase() == "children" || input.toLowerCase() == "spouse"
 }
 function parentFilter(people, parentID){
-  let id = 'id';
+  let id = "id";
   let parent = people.filter(function(el){
     if(el[id] == parentID){
       return true;
@@ -214,7 +215,7 @@ function parentFilter(people, parentID){
   return parent[0];
 }
 function findSpouseName(people, spouseID){
-  let id = 'id';
+  let id = "id";
   let spouse = people.filter(function(el){
     if(el[id] == spouseID){
       return true;
@@ -226,20 +227,16 @@ function findSpouseName(people, spouseID){
   return spouse[0];
 }
 
-
 // add person.parents[0, 1] as parameter when calling in mainMenu();
-function descendantsFilter(people, possibleDescendantId){
+function descendantsFilter(person, people){
   let id = "id";
   let foundDescendants = people.filter(function(el){
-    if(el["id"] == [possibleDescendantId]){
+    if(el[id] == people.parents){
       return true
     }
     else{
       return false
     }
   });
-  descendantsFilter(people, foundDescendants);
+  descendantsFilter(foundDescendants, people);
 }
-
-
-

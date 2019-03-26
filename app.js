@@ -1,4 +1,9 @@
 "use strict"
+
+
+
+
+console.log("ass balls")
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
@@ -11,7 +16,7 @@ function app(people){
       foundPerson = searchByName(people);
       break;
     case 'no':
-      foundPerson = traitsMenu(people);
+      familyMenu(people, traitsMenu(people));
       break;
       default:
     app(people); // restart app
@@ -34,16 +39,17 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
       displayPerson(person);
+      familyMenu(people, person);
     break;
     case "family":
-      let specificFamily = promptFor("Would you like info on Parents, Siblings, or Children?", familyInput).toLowerCase();
+      familyMenu(people, person);
+      
       if(specificFamily == "parents"){
-        displayParent(parentFilter(people, person.parents[0]));
-        displayParent(parentFilter(people, person.parents[1]));
+        
         
       }
       else if(specificFamily == "spouse"){
-        displayPerson(findSpouseName(people, person.currentSpouse));
+        
       }
       else if(specificFamily == "siblings"){
         
@@ -106,15 +112,16 @@ function displayPerson(person){
 }
 
 function displayParent(people, person){
+  let id = "id";
   let grass = people.filter(function(el){
-    if(el["id"] == person){
+    if(el[id] == person){
       return true;
     }
     else{
       return false;
     }
   });
-  return grass;
+  return grass[0];
   // let pain = "Parent: " + person.firstName + " " + person.lastName + "\n";
   // alert(pain);
 }
@@ -165,13 +172,12 @@ function traitsMenu(people){
     case "occupation":
       promptResult = prompt("Enter an occupation.").trim();
       result = traitsFilter(promptResult, traitPrompt, people);
+      break;
     case "restart":
       app(people);
       break;
     case "quit":
       return;
-    default:
-      traitsMenu();
   }
   if(result.length > 1){
   displayPeople(result);
@@ -180,7 +186,7 @@ function traitsMenu(people){
   else{
   displayPeople(result);
   return result[0];
- 
+  
   }
 }
 
@@ -214,7 +220,7 @@ function parentFilter(people, parentID){
   });
   return parent[0];
 }
-function findSpouseName(people, spouseID){
+function spouseFilter(people, spouseID){
   let id = "id";
   let spouse = people.filter(function(el){
     if(el[id] == spouseID){
@@ -239,4 +245,26 @@ function descendantsFilter(person, people){
     }
   });
   descendantsFilter(foundDescendants, people);
+}
+function siblingFilter(people, siblingID){
+  let result = people.filter(function(el){
+    if(el == siblingID){
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
+  return result[0];
+}
+function familyMenu(people, person){
+  switch(promptFor("Would you like info on 'Parents', 'Spouse', or 'Siblings'", familyInput).toLowerCase()){
+    case "parents":
+      displayParent(people, parentFilter(people, person.parents[0]));
+      displayParent(people, parentFilter(people, person.parents[1]));
+    case "spouse":
+      displayPerson(people, spouseFilter(people, person.currentSpouse));
+    case "siblings":
+      displayPerson(people, siblingFilter(people, person.parents[0]));
+  }
 }

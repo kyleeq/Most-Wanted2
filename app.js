@@ -57,7 +57,7 @@ function mainMenu(person, people){
       return foundRelatives[0];
     break;
     case "descendants":
-      displayPeople(descendantsFilter(person, people));
+      descendantsFilter(person, people);
     break;
     case "restart":
     app(people); // restart
@@ -106,20 +106,6 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-function displayParent(people, person){
-  let id = "id";
-  let grass = people.filter(function(el){
-    if(el[id] == person){
-      return true;
-    }
-    else{
-      return false;
-    }
-  });
-  return grass[0];
-  // let pain = "Parent: " + person.firstName + " " + person.lastName + "\n";
-  // alert(pain);
-}
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
@@ -169,7 +155,7 @@ function traitsMenu(people){
       result = traitsFilter(promptResult, traitPrompt, people);
       break;
     case "restart":
-      app(people);
+      mainMenu(people);
       break;
     case "quit":
       return;
@@ -203,18 +189,22 @@ function familyFilter(){
 function familyInput(input){
   return input.toLowerCase() == "parents" || input.toLowerCase() == "siblings" || input.toLowerCase() == "descendants" || input.toLowerCase() == "spouse" || input.toLowerCase() == "restart" || input.toLowerCase() == "quit";
 }
-function parentFilter(people, parentID){
+function parentsFilter(person, people){
   let id = "id";
-  let parent = people.filter(function(el){
-    if(el[id] == parentID){
+  let foundParents = people.filter(function(el){
+    if(el[id] == person.parents[0] || el[id] == person.parents[1]){
       return true;
     }
     else{
       return false;
     }
+
   });
-  return parent[0];
+
+    displayPeople(foundParents);
+    return foundParents[0];
 }
+
 function spouseFilter(people, spouseID){
   let id = "id";
   let spouse = people.filter(function(el){
@@ -231,17 +221,18 @@ function spouseFilter(people, spouseID){
 // add person.parents[0, 1] as parameter when calling in mainMenu();
 function descendantsFilter(person, people){
   let id = "id";
-  people = person.parent;
   let foundDescendants = people.filter(function(el){
-    if(id == people){
+    if(person[id] == el.parents[0] || person[id] == el.parents[1]){
       return true;
     }
     else{
       return false;
     }
-    displayPeople(foundDecendants);
-    return foundDecendants[0];
+
   });
+
+    displayPeople(foundDescendants);
+    return foundDescendants[0];
 }
 
 function siblingFilter(people, siblingID){
@@ -258,8 +249,7 @@ function siblingFilter(people, siblingID){
 function familyMenu(people, person){
   switch(promptFor("Would you like info on 'Parents', 'Spouse', or 'Siblings.' You can also 'restart' or 'quit.'", familyInput).toLowerCase()){
     case "parents":
-      displayParent(people, parentFilter(people, person.parents[0]));
-      displayParent(people, parentFilter(people, person.parents[1]));
+      parentFilter(person, people);
       break;
     case "spouse":
       displayPerson(people, spouseFilter(people, person.currentSpouse));

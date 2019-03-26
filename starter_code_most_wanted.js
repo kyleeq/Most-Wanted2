@@ -21,6 +21,16 @@ function displayFamily(person){
   }).join("\n"));
 }
 
+function nameCheck(){
+	let name = people[""]
+}
+
+function descendantsFilter(person, people){
+  for(let i = 0; i < people.length; i++){
+    if (person.id[0] == people[i].parents[0] || person.id == people[i].parents[1]);
+      displayPeople(people[i]);
+  }
+}
 // add person.parents[0, 1] as parameter when calling in mainMenu();
 // function descendantsFilter(people, possibleDescendantId){
 // 	let id = "id";

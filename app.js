@@ -1,9 +1,4 @@
 "use strict"
-
-
-
-
-console.log("ass balls")
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
@@ -62,7 +57,7 @@ function mainMenu(person, people){
       return foundRelatives[0];
     break;
     case "descendants":
-      return descendantsFilter(person);
+      displayPeople(descendantsFilter(person, people));
     break;
     case "restart":
     app(people); // restart
@@ -139,7 +134,7 @@ function yesNo(input){
 }
 
 function traitInput(input){
-  return input.toLowerCase() == "id" || input.toLowerCase() == "gender" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "eyecolor";
+  return input.toLowerCase() == "id" || input.toLowerCase() == "gender" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "eyecolor" || input.toLowerCase() == "restart" || input.toLowerCase() == "quit";
 }
 
 
@@ -206,7 +201,7 @@ function familyFilter(){
 }
 
 function familyInput(input){
-  return input.toLowerCase() == "parents" || input.toLowerCase() == "siblings" || input.toLowerCase() == "children" || input.toLowerCase() == "spouse"
+  return input.toLowerCase() == "parents" || input.toLowerCase() == "siblings" || input.toLowerCase() == "descendants" || input.toLowerCase() == "spouse" || input.toLowerCase() == "restart" || input.toLowerCase() == "quit";
 }
 function parentFilter(people, parentID){
   let id = "id";
@@ -236,16 +231,19 @@ function spouseFilter(people, spouseID){
 // add person.parents[0, 1] as parameter when calling in mainMenu();
 function descendantsFilter(person, people){
   let id = "id";
+  people = person.parent;
   let foundDescendants = people.filter(function(el){
-    if(el[id] == people.parents){
-      return true
+    if(id == people){
+      return true;
     }
     else{
-      return false
+      return false;
     }
+    displayPeople(foundDecendants);
+    return foundDecendants[0];
   });
-  descendantsFilter(foundDescendants, people);
 }
+
 function siblingFilter(people, siblingID){
   let result = people.filter(function(el){
     if(el == siblingID){
@@ -258,13 +256,21 @@ function siblingFilter(people, siblingID){
   return result[0];
 }
 function familyMenu(people, person){
-  switch(promptFor("Would you like info on 'Parents', 'Spouse', or 'Siblings'", familyInput).toLowerCase()){
+  switch(promptFor("Would you like info on 'Parents', 'Spouse', or 'Siblings.' You can also 'restart' or 'quit.'", familyInput).toLowerCase()){
     case "parents":
       displayParent(people, parentFilter(people, person.parents[0]));
       displayParent(people, parentFilter(people, person.parents[1]));
+      break;
     case "spouse":
       displayPerson(people, spouseFilter(people, person.currentSpouse));
+      break;
     case "siblings":
       displayPerson(people, siblingFilter(people, person.parents[0]));
+      break;
+    case "restart":
+      mainMenu(people, person);
+    case "quit":
+      return;
+      break;
   }
 }
